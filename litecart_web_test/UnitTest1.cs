@@ -9,6 +9,7 @@ namespace litecart_web_test
         [TestMethod]
         public void TestMethod1()
         {
+            //test
         }
     }
 }
