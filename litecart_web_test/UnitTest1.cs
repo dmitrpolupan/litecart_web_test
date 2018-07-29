@@ -64,6 +64,40 @@ namespace litecart_web_test
 
         }
 
+        [Test]
+        public void TestSquare()
+        {
+            Square s1 = new Square(10);
+            Square s2 = new Square(15);
+            Square s3 = s1;
+
+            NUnit.Framework.Assert.AreEqual(s1.Area, 10);
+            NUnit.Framework.Assert.AreEqual(s2.Area, 15);
+            NUnit.Framework.Assert.AreEqual(s3.Area, 10);
+
+            s3.Area = 20;
+
+            NUnit.Framework.Assert.AreEqual(s1.Area, 20);
+
+        }
+
+        [Test]
+        public void TestCircle()
+        {
+            Circle s1 = new Circle(1);
+            Circle s2 = new Circle(5);
+            Circle s3 = s1;
+
+            NUnit.Framework.Assert.AreEqual(s1.Radius, 1);
+            NUnit.Framework.Assert.AreEqual(s2.Radius, 5);
+            NUnit.Framework.Assert.AreEqual(s3.Radius, 1);
+
+            s3.Radius = 7;
+
+            NUnit.Framework.Assert.AreEqual(s1.Radius, 7);
+
+        }
+
         private void LoginToPage(string user, string password)
         {
             driver.FindElement(By.Name("username")).SendKeys(user);
