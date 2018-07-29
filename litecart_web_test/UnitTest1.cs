@@ -33,9 +33,20 @@ namespace litecart_web_test
         }
 
         [Test]
+        public void TestOnLitecart()
+        {
+            driver.Url = "http://localhost/litecart/en/";
+            driver.FindElement(By.ClassName("active")).Click();
+            //driver.FindElement(By.XPath(".//*[@data-name='Red Duck']")).Click();
+            driver.FindElement(By.LinkText("Regional Settings")).Click();
+            wait.Until(ExpectedConditions.TitleIs("Regional Settings | My Store"));
+        }
+
+        [Test]
         public void TestGoogle()
         {
-            driver.Url = "https://www.google.com.ua";
+           
+            OpenPage("https://www.google.com.ua");
             IWebElement a = driver.FindElement(By.Name("q"));
             a.SendKeys("webdrivers");
             driver.FindElement(By.Id("gs_ok0")).Click();
@@ -47,15 +58,25 @@ namespace litecart_web_test
         [Test]
         public void EnterToAdminLitecart()
         {
-            driver.Url = "http://localhost/litecart/admin/login.php";
-            driver.FindElement(By.Name("username")).SendKeys("admin");
-            driver.FindElement(By.Name("password")).SendKeys("admin");
-            driver.FindElement(By.ClassName("btn-default")).Click();
+            OpenPage("http://localhost/litecart/admin/login.php");
+            LoginToPage("admin", "admin");
             wait.Until(ExpectedConditions.TitleIs("My Store"));
 
         }
 
-       
+        private void LoginToPage(string user, string password)
+        {
+            driver.FindElement(By.Name("username")).SendKeys(user);
+            driver.FindElement(By.Name("password")).SendKeys(password);
+            driver.FindElement(By.ClassName("btn-default")).Click();
+        }
+
+        private void OpenPage(string siteaddress)
+        {
+            driver.Url = siteaddress;
+            //siteaddress = "";
+        }
+
 
         [TearDown]
         public void stop()
